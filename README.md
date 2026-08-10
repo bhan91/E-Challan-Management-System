@@ -3,7 +3,7 @@
 
 **🚦 E-Challan Management System**
 
-The E-Challan Management System is a web-based application developed as a DBMS mini project to digitally manage traffic violations and challan payments.
+#The E-Challan Management System is a web-based application developed as a DBMS mini project to digitally manage traffic violations and challan payments.
 
 The system allows vehicle owners to search their challan details using their vehicle registration number, while authorized police officers can log in and manage registered vehicles, issue challans, record violation locations and times, and process payments.
 
@@ -13,22 +13,6 @@ Backend: Python
 Framework: Flask
 Database: MySQL
 Database Connector: MySQL Connector/Python
-
-✨ Main Features
-👤 Police officer login and logout
-🚗 Registered vehicle management
-🚨 Add traffic violations/challans
-📍 Record violation location
-🕐 Automatically record violation time
-🔎 Search challans using vehicle registration number
-💰 Fine management
-💳 UPI and Card payment support
-💵 Cash payment through police dashboard
-✅ Automatic Unpaid → Paid status update
-🧾 Payment transaction records
-🔐 Foreign-key based database relationships
-🗄️ Normalized MySQL database design
-🗃️ Database Tables
 
 *For your E-Challan Management System, you can define three main roles:*
 
@@ -198,52 +182,77 @@ CREATE TABLE RegisteredVehicle (
 );
 ```
 
+**2. Police_Details**
 ```sql
 CREATE TABLE Police_Details (
-    
     police_id INT PRIMARY KEY AUTO_INCREMENT,
-    
     officer_name VARCHAR(100),
-    
     badge_number VARCHAR(50),
-    
     rank_name VARCHAR(50),
-    
     mobile_no VARCHAR(15),
-    
     address VARCHAR(200)
 );
 ```
 
+**3. Challan**
+```sql
 CREATE TABLE Challan (
-    
     id INT PRIMARY KEY AUTO_INCREMENT,
-    
     reg_no VARCHAR(20),
-    
     violation VARCHAR(100),
-    
     location VARCHAR(100),
-    
     violation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    
     fine INT,
-    
     status VARCHAR(20) DEFAULT 'Unpaid',
-    
     payment_mode VARCHAR(20),
-
     CONSTRAINT fk_challan_vehicle
-    
     FOREIGN KEY (reg_no)
-    
     REFERENCES RegisteredVehicle(reg_no)
 );
+```
+
+**4. Payment**
+```sql
+CREATE TABLE Payment (
+    payment_id INT PRIMARY KEY AUTO_INCREMENT,
+    challan_id INT,
+    reg_no VARCHAR(20),
+    amount INT,
+    payment_mode VARCHAR(20),
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    transaction_id VARCHAR(100),
+    payment_status VARCHAR(20) DEFAULT 'Success',
+
+    CONSTRAINT fk_payment_challan
+    FOREIGN KEY (challan_id)
+    REFERENCES Challan(id),
+
+    CONSTRAINT fk_payment_vehicle
+    FOREIGN KEY (reg_no)
+    REFERENCES RegisteredVehicle(reg_no)
+);
+```
+
+**5. 5. Police**
+```sql
+CREATE TABLE Police (
+    login_id INT PRIMARY KEY AUTO_INCREMENT,
+    police_id INT,
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(100),
+
+    CONSTRAINT fk_police_details
+    FOREIGN KEY (police_id)
+    REFERENCES Police_Details(police_id)
+);
+```
+
 
 SHOW TABLES;
 
 **Check table structures**
 
+```sql
 DESC RegisteredVehicle;
 
 DESC Police_Details;
@@ -253,7 +262,7 @@ DESC Police;
 DESC Challan;
 
 DESC Payment;
-
+```
 
 
 ***Then run your Flask project***
@@ -279,6 +288,7 @@ Open your browser and go to:
 ``http://127.0.0.1:5000``
 
 Your E-Challan Management System should now open.
+
 
 **🎯 Project Objective**
 
