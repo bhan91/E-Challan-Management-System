@@ -97,7 +97,7 @@ Access flow:
      Reports          Records         Payment Status
 
 **File Structure**
-``
+
 e_challan/
 │
 ├── app.py
@@ -125,7 +125,7 @@ e_challan/
     │
     └── js/
         └── script.js
-``
+
 
 **Database Tables – E-Challan Management System**
 1. RegisteredVehicle
