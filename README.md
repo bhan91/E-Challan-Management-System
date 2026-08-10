@@ -179,9 +179,22 @@ challan_id → Challan(id)
 reg_no → RegisteredVehicle(reg_no)
 
 
-Command 
+**Command to create a DataBase**
+Create a Database
 ```CREATE DATABASE IF NOT EXISTS echallan;```
 ```USE echallan;```
+
+**1. RegisteredVehicle**
+
+```CREATE TABLE RegisteredVehicle (```
+   ``` reg_no VARCHAR(20) PRIMARY KEY,```
+    ```owner_name VARCHAR(100),```
+    ```vehicle_type VARCHAR(50),```
+    ```model VARCHAR(50),```
+    ```color VARCHAR(30),```
+   ``` mobile_no VARCHAR(15),```
+   ``` address VARCHAR(200)```
+```);```
 
 **🎯 Project Objective**
 
