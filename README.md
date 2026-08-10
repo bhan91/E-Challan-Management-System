@@ -9,12 +9,18 @@ The system allows vehicle owners to search their challan details using their veh
 
 **🛠️ Technologies Used**
 Frontend: HTML, CSS
+
 Backend: Python
+
 Framework: Flask
+
 Database: MySQL
+
 Database Connector: MySQL Connector/Python
 
+
 *For your E-Challan Management System, you can define three main roles:*
+
 
 **👮 Police Role**
 
@@ -34,6 +40,7 @@ Database Connector: MySQL Connector/Python
 12. Update challan status from Unpaid → Paid
 13. View payment mode and transaction details
 
+
 **🛡️ Admin Role**
 
 *The Admin module manages the overall system and database.*
@@ -48,6 +55,7 @@ Database Connector: MySQL Connector/Python
 8. Manage database records
 9. Generate reports
 10. Maintain system security and access control
+
 
 **👤 Public/User Role**
 
@@ -65,6 +73,7 @@ Database Connector: MySQL Connector/Python
 10. Pay using UPI or Card
 11. View payment confirmation
 12. Role Summary
+
 
 *Role	Main Responsibilities*
 | Role           | Main Responsibilities                                         |
@@ -87,14 +96,13 @@ Access flow:
      Vehicle Mgmt     Cash Payment    UPI/Card Payment
      Reports          Records         Payment Status
 
+
 **Database Tables – E-Challan Management System**
 1. RegisteredVehicle
 2. Challan
 3. Payment
 4. Police_Details
 5. Police
-
-
 
 
 **1. RegisteredVehicle**
@@ -110,6 +118,7 @@ Access flow:
 | `address`       | Owner's address             |
 Primary Key: police_id
 
+
 **2. Police_Details**
 *The Police_Details table stores personal and professional information about police officers.*
 | Column             | Description              |
@@ -122,6 +131,7 @@ Primary Key: police_id
 | `address`          | Officer's address        |
 Primary Key: login_id
 Foreign Key: police_id → Police_Details(police_id)
+
 
 **4. Challan**
 *The Challan table is the main table for storing traffic violation records.*
@@ -138,12 +148,16 @@ Foreign Key: police_id → Police_Details(police_id)
 
 Primary Key: id
 Foreign Key: reg_no → RegisteredVehicle(reg_no)
+
+
 id       : 202605
 reg_no   : KA01A0001
 violation: No Helmet
 location : MG Road
 fine     : ₹500
 status   : Unpaid
+
+
 
 **5. Payment**
 *The Payment table stores payment transactions made against challans.*
@@ -163,10 +177,12 @@ Foreign Keys: challan_id → Challan(id)
 reg_no → RegisteredVehicle(reg_no)
 
 
+
 **Command to create a DataBase**
 Create a Database
 ```CREATE DATABASE IF NOT EXISTS echallan;```
 ```USE echallan;```
+
 
 **1. RegisteredVehicle**
 
@@ -265,7 +281,9 @@ DESC Payment;
 ```
 
 
+
 ***Then run your Flask project***
+
 
 Open Command Prompt / VS Code Terminal in your project folder:
 
