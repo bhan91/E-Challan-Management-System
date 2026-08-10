@@ -1,18 +1,19 @@
 # E-Challan-Management-System
 🚦 E-Challan Management System — A web-based DBMS project for managing traffic violations, registered vehicles, challans, police records, and payments using Python Flask and MySQL.
 
-🚦 E-Challan Management System
+**🚦 E-Challan Management System**
 
 The E-Challan Management System is a web-based application developed as a DBMS mini project to digitally manage traffic violations and challan payments.
 
 The system allows vehicle owners to search their challan details using their vehicle registration number, while authorized police officers can log in and manage registered vehicles, issue challans, record violation locations and times, and process payments.
 
-🛠️ Technologies Used
+**🛠️ Technologies Used**
 Frontend: HTML, CSS
 Backend: Python
 Framework: Flask
 Database: MySQL
 Database Connector: MySQL Connector/Python
+
 ✨ Main Features
 👤 Police officer login and logout
 🚗 Registered vehicle management
@@ -28,14 +29,165 @@ Database Connector: MySQL Connector/Python
 🔐 Foreign-key based database relationships
 🗄️ Normalized MySQL database design
 🗃️ Database Tables
-RegisteredVehicle
-Challan
-Payment
-Police_Details
-Police
-🎯 Project Objective
+
+*For your E-Challan Management System, you can define three main roles:*
+
+**👮 Police Role**
+
+*The Police module is responsible for managing traffic violations and challans.*
+
+1. Police officer login/logout
+2. Search registered vehicles
+3. Verify vehicle registration
+4. Add new traffic challans
+5. Select violation type
+6. Enter violation location
+7. Automatically record violation date and time
+8. Set fine amount
+9. View all challan records
+10. Search challans by vehicle number
+11. Process cash payments
+12. Update challan status from Unpaid → Paid
+13. View payment mode and transaction details
+
+**🛡️ Admin Role**
+
+*The Admin module manages the overall system and database.*
+
+1. Admin login/logout
+2. Manage police officer accounts
+3. Add, update, and remove police details
+4. Manage registered vehicles
+5. View all challans
+6. View all payment records
+7. Monitor paid and unpaid challans
+8. Manage database records
+9. Generate reports
+10. Maintain system security and access control
+
+**👤 Public/User Role**
+
+*The Public module allows vehicle owners to check their challan information.*
+
+1. Enter vehicle registration number
+2. View unpaid challans
+3. View challan ID
+4. View vehicle number
+5. View violation
+6. View violation location
+7. View violation date and time
+8. View fine amount
+9. View payment status
+10. Pay using UPI or Card
+11. View payment confirmation
+12. Role Summary
+
+*Role	Main Responsibilities*
+| Role           | Main Responsibilities                                         |
+| -------------  | ------------------------------------------------------------- |
+| 👮 **Police** | Issue challans, manage violations, collect cash payments       |
+| 🛡️ **Admin**  | Manage users, police, vehicles, challans, payments and system  |
+| 👤 **Public** | Search challans and make online payments                       |
+
+
+Access flow:
+
+                    E-CHALLAN SYSTEM
+                          │
+          ┌───────────────┼───────────────┐
+          │               │               │
+       ADMIN            POLICE          PUBLIC
+          │               │               │
+     System Mgmt      Challan Mgmt    Search Challan
+     Police Mgmt      Vehicle Check   View Fine
+     Vehicle Mgmt     Cash Payment    UPI/Card Payment
+     Reports          Records         Payment Status
+
+**Database Tables – E-Challan Management System**
+1. RegisteredVehicle
+2. Challan
+3. Payment
+4. Police_Details
+5. Police
+
+
+
+
+**1. RegisteredVehicle**
+*The RegisteredVehicle table stores information about vehicles that are officially registered in the system. A challan can be issued only for a registered vehicle.*
+| Column          | Description                 |
+| --------------- | --------------------------- |
+| `reg_no` **PK** | Vehicle registration number |
+| `owner_name`    | Name of vehicle owner       |
+| `vehicle_type`  | Type of vehicle             |
+| `model`         | Vehicle model               |
+| `color`         | Vehicle color               |
+| `mobile_no`     | Owner's mobile number       |
+| `address`       | Owner's address             |
+Primary Key: police_id
+
+**2. Police_Details**
+*The Police_Details table stores personal and professional information about police officers.*
+| Column             | Description              |
+| ------------------ | ------------------------ |
+| `police_id` **PK** | Unique police officer ID |
+| `officer_name`     | Name of police officer   |
+| `badge_number`     | Police badge number      |
+| `rank_name`        | Officer's rank           |
+| `mobile_no`        | Officer's mobile number  |
+| `address`          | Officer's address        |
+Primary Key: login_id
+Foreign Key: police_id → Police_Details(police_id)
+
+**4. Challan**
+*The Challan table is the main table for storing traffic violation records.*
+| Column           | Description                       |
+| ---------------- | --------------------------------- |
+| `id` **PK**      | Unique challan ID                 |
+| `reg_no` **FK**  | Vehicle registration number       |
+| `violation`      | Type of traffic violation         |
+| `location`       | Location where violation occurred |
+| `violation_time` | Date and time of violation        |
+| `fine`           | Fine amount                       |
+| `status`         | Paid / Unpaid                     |
+| `payment_mode`   | UPI / Card / Cash                 |
+Primary Key: id
+Foreign Key: reg_no → RegisteredVehicle(reg_no)
+id       : 202605
+reg_no   : KA01A0001
+violation: No Helmet
+location : MG Road
+fine     : ₹500
+status   : Unpaid
+
+**5. Payment**
+*The Payment table stores payment transactions made against challans.*
+| Column              | Description                  |
+| ------------------- | ---------------------------- |
+| `payment_id` **PK** | Unique payment ID            |
+| `challan_id` **FK** | References the challan       |
+| `reg_no` **FK**     | Vehicle registration number  |
+| `amount`            | Amount paid                  |
+| `payment_mode`      | UPI / Card / Cash            |
+| `payment_date`      | Date of payment              |
+| `transaction_id`    | Unique transaction reference |
+| `payment_status`    | Payment status               |
+
+Primary Key: payment_id
+Foreign Keys:
+challan_id → Challan(id)
+reg_no → RegisteredVehicle(reg_no)
+
+
+Command 
+```CREATE DATABASE IF NOT EXISTS echallan;```
+```USE echallan;```
+
+**🎯 Project Objective**
 
 The main objective is to reduce manual paperwork and provide an efficient, centralized system for managing traffic violations, challans, registered vehicles, and payments while demonstrating practical DBMS concepts such as normalization, primary keys, foreign keys, triggers, views, and relational database design.
+
+****
 
 Suggested GitHub topics:
 python flask mysql dbms e-challan traffic-management html css database-project crud
