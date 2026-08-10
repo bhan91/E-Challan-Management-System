@@ -157,8 +157,6 @@ location : MG Road
 fine     : ₹500
 status   : Unpaid
 
-
-
 **5. Payment**
 *The Payment table stores payment transactions made against challans.*
 | Column              | Description                  |
@@ -280,10 +278,7 @@ DESC Challan;
 DESC Payment;
 ```
 
-
-
 ***Then run your Flask project***
-
 
 Open Command Prompt / VS Code Terminal in your project folder:
 
