@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Challan Results</title>
+
+    <style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 30px;
+
+        }
+
+        h2 {
+
+            color: #2c3e50;
+
+        }
+
+        table {
+
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+
+        }
+
+        table,
+        th,
+        td {
+
+            border: 1px solid #ccc;
+
+        }
+
+        th {
+
+            background-color: #3498db;
+            color: white;
+
+        }
+
+        th,
+        td {
+
+            padding: 10px;
+            text-align: center;
+
+        }
+
+        button {
+
+            background-color: rgb(33, 212, 240);
+
+            color: black;
+
+            padding: 10px 20px;
+
+            border: none;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            margin-top: 20px;
+
+            font-size: 16px;
+
+            margin-right: 10px;
+
+        }
+
+        button:hover {
+
+            background-color: #1aa8c0;
+
+        }
+
+        .paid {
+
+            color: green;
+            font-weight: bold;
+
+        }
+
+        .unpaid {
+
+            color: red;
+            font-weight: bold;
+
+        }
+
+        .no-records {
+
+            color: red;
+            font-weight: bold;
+
+        }
+
+        a {
+
+            text-decoration: none;
+            color: blue;
+
+            font-size: 16px;
+
+        }
+
+        .top-buttons {
+
+            margin-bottom: 20px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- TOP BUTTONS -->
+
+    <div class="top-buttons">
+
+        <button onclick="location.reload()">
+
+            🔄 Refresh
+
+        </button>
+    </div>
+        
+    <h2>
+        Challan Results for {{ reg_no }}
+    </h2>
+
+    <!-- PAYMENT FORM -->
+
+    <form action="/payment" method="post" onsubmit="return validateSelection()">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Select</th>
+
+                    <th>ID</th>
+
+                    <th>Vehicle No</th>
+
+                    <th>Violation</th>
+
+                    <th>Location</th>
+
+                    <th>Time</th>
+
+                    <th>Fine</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% if data %}
+
+                    {% for row in data %}
+
+                    <tr>
+
+                        <!-- SELECT RADIO -->
+
+                        <td>
+
+                            {% if row.status == 'Unpaid' %}
+
+                            <input
+                                type="radio"
+                                name="challan_id"
+                                value="{{ row.id }}">
+
+                            {% endif %}
+
+                        </td>
+
+                        <!-- CHALLAN DATA -->
+
+                        <td>{{ row.id }}</td>
+
+                        <td>{{ row.reg_no }}</td>
+
+                        <td>{{ row.violation }}</td>
+
+                        <td>{{ row.location }}</td>
+
+                        <td>{{ row.violation_time }}</td>
+
+                        <td>
+                            ₹ {{ row.fine }}
+                        </td>
+
+                        <!-- STATUS -->
+
+                        <td>
+
+                            {% if row.status == 'Paid' %}
+
+                                <span class="paid">
+                                    Paid ✅
+                                </span>
+
+                            {% else %}
+
+                                <span class="unpaid">
+                                    Unpaid ❌
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <tr>
+
+                        <td colspan="8" class="no-records">
+
+                            No Challan Records Found
+
+                        </td>
+
+                    </tr>
+
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+        <!-- PAYMENT BUTTON -->
+
+        {% if data %}
+
+        <button type="submit">
+
+            Pay Selected Violation
+
+        </button>
+
+        {% endif %}
+
+    </form>
+
+    <!-- JAVASCRIPT VALIDATION -->
+
+    <script>
+
+        function validateSelection() {
+
+            // Check if unpaid challans exist
+            const unpaidOptions = document.querySelectorAll('input[name="challan_id"]');
+
+            // If all challans are paid
+            if (unpaidOptions.length === 0) {
+
+                alert("⚠ No unpaid challan available.");
+
+                return false;
+
+            }
+
+            // Check if user selected a challan
+            const selected = document.querySelector('input[name="challan_id"]:checked');
+
+            if (!selected) {
+
+                alert("⚠ Please select a violation to proceed.");
+
+                return false;
+
+            }
+
+
+            return true;
+
+        }
+
+    </script>
+    <div>
+        <button onclick="history.back()">
+
+            ← Go Back
+
+        </button>
+
+    </div>
+
+</body>
+
+</html>

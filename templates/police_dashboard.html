@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Police Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f4f6f9;
+            text-align: center; /* Center headings */
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        h3 {
+            margin-top: 25px;
+            color: #34495e;
+        }
+
+        /* Centering container */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            border: none;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        table {
+            width: 90%;
+            margin: 25px auto; /* Center table */
+            border-collapse: collapse;
+            background: white;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #3498db;
+            color: white;
+        }
+
+        .paid {
+            color: green;
+            font-weight: bold;
+        }
+
+        .unpaid {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* Logout button styling */
+        .logout-btn {
+            display:inline-block;
+            width:150px;
+            background:red;
+            color:white;
+            text-align:center;
+            padding:10px;
+            border-radius:5px;
+            text-decoration:none;
+            font-weight:bold;
+        }
+        .logout-btn:hover {
+            background:darkred;
+        }
+    </style>
+</head>
+<body>
+    
+  <div style="text-align:right; margin-bottom:20px;">
+   <b>👮 Officer:</b> {{ officer_name }}
+   <br>
+   <b>Login ID:</b> {{ login_id }}
+   <br>
+   <b>Username:</b> {{ username }}
+   <br>
+    <a href="/logout" class="logout-btn">Logout</a>
+</div>
+<br>
+    <!-- Logo served via Flask static -->
+    <img src="{{ url_for('static', filename='karnataka_logo.png') }}"  style="height:80px;">
+    <h2>Police Dashboard</h2>
+
+    <!-- ADD CHALLAN -->
+    <h3>Add Challan</h3>
+    <div class="form-container">
+        <form action="/add" method="post">
+            <label>Vehicle Number:</label>
+            <input type="text" name="reg_no" placeholder="Enter Vehicle Number" required>
+
+            <label>Violation:</label>
+            <select name="violation" required>
+                <option value="">-- Select Violation --</option>
+                <optgroup label="Traffic Rules">
+                    <option value="No Helmet">No Helmet</option>
+                    <option value="Signal Jump">Signal Jump</option>
+                    <option value="Over Speed">Over Speed</option>
+                    <option value="Triple Riding">Triple Riding</option>
+                    <option value="Wrong Parking">Wrong Parking</option>
+                </optgroup>
+                <optgroup label="Safety Violations">
+                    <option value="Drunk And Drive">Drunk And Drive</option>
+                    <option value="No Seat Belt">No Seat Belt</option>
+                    <option value="Using Mobile While Driving">Using Mobile While Driving</option>
+                </optgroup>
+                <optgroup label="Documentation">
+                    <option value="Documents Missing">Documents Missing</option>
+                </optgroup>
+            </select>
+
+            <label>Location:</label>
+            <input type="text" name="location" placeholder="Enter Violation Location" required>
+
+            <label>Fine Amount:</label>
+            <input type="number" name="fine" placeholder="Enter Fine Amount" required>
+
+            <button type="submit">Add Challan</button>
+        </form>
+    </div>
+
+    <!-- SEARCH CHALLAN -->
+    <h3>Search Challan</h3>
+    <div class="form-container">
+        <form action="/search" method="post">
+            <input type="text" name="reg_no" placeholder="Enter Vehicle Number" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- POLICE CASH PAYMENT -->
+    <h3>Police Cash Payment</h3>
+    <div class="form-container">
+        <form action="/police_pay" method="post">
+            <label>Challan ID:</label>
+            <input type="number" name="challan_id" placeholder="Enter Challan ID" required>
+            <button type="submit">Mark As Cash Paid</button>
+        </form>
+    </div>
+
+    <!-- DISPLAY CHALLANS -->
+    <h3>All Challan Records</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Vehicle No</th>
+                <th>Violation</th>
+                <th>Location</th>
+                <th>Violation Time</th>
+                <th>Fine</th>
+                <th>Status</th>
+                <th>Payment Mode</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for challan in challans %}
+            <tr>
+                <td>{{ challan.id }}</td>
+                <td>{{ challan.reg_no }}</td>
+                <td>{{ challan.violation }}</td>
+                <td>{{ challan.location }}</td>
+                <td>{{ challan.violation_time }}</td>
+                <td>₹ {{ challan.fine }}</td>
+                <td>
+                    {% if challan.status == 'Paid' %}
+                        <span class="paid">Paid ✅</span>
+                    {% else %}
+                        <span class="unpaid">Unpaid ❌</span>
+                    {% endif %}
+                </td>
+                <td>{{ challan.payment_mode }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="8">No Challans Found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .dashboard {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h3 {
+            color: #2980b9;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 8px 0;
+        }
+
+        fieldset {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        label {
+            font-size: 15px;
+            display: block;
+            margin: 10px 0;
+            text-align: left; /* Aligns nicely with inputs */
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #219150;
+        }
+
+        .back-container {
+            max-width: 600px;
+            margin: 10px auto;
+        }
+
+        .btn-back {
+            background-color: #7f8c8d;
+            margin-top: 0;
+        }
+
+        .btn-back:hover {
+            background-color: #95a5a6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Payment Dashboard</h1>
+
+    <div class="dashboard">
+
+        <h3>Challan Details</h3>
+        <p><b>Challan ID:</b> {{ challan.id }}</p>
+        <p><b>Vehicle No:</b> {{ challan.reg_no }}</p>
+        <p><b>Violation:</b> {{ challan.violation }}</p>
+        <p><b>Location:</b> {{ challan.location }}</p>
+        <p style="font-size: 18px; color: #e74c3c;"><b>Fine:</b> ₹ {{ challan.fine }}</p>
+
+        <hr style="border: 0; border-top: 1px solid #ccc; margin: 20px 0;">
+
+        <form action="/pay" method="post">
+
+            <input type="hidden" name="challan_id" value="{{ challan.id }}">
+
+            <h3>Select Payment Method</h3>
+
+            <fieldset>
+                <legend>Choose Mode:</legend>
+
+                <label>
+                    <input type="radio" name="mode" value="UPI" required>
+                    UPI (Google Pay, PhonePe, BHIM)
+                </label>
+
+                <label>
+                    <input type="radio" name="mode" value="Card">
+                    Debit / Credit Card
+                </label>
+            </fieldset>
+
+            <button type="submit">Pay Now</button>
+
+        </form>
+    </div>
+
+    <div class="back-container">
+        <button onclick="history.back()" class="btn-back">← Go Back</button>
+    </div>
+
+</body>
+
+</html>
