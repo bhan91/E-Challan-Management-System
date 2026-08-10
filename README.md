@@ -240,7 +240,7 @@ DESC Challan;
 DESC Payment;
 
 
-**Then run your Flask project**
+***Then run your Flask project***
 
 Open Command Prompt / VS Code Terminal in your project folder:
 
