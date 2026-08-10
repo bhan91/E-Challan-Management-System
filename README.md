@@ -8,10 +8,15 @@
 The system allows vehicle owners to search their challan details using their vehicle registration number, while authorized police officers can log in and manage registered vehicles, issue challans, record violation locations and times, and process payments.
 
 **🛠️ Technologies Used**
+
 **Frontend: HTML, CSS**
+
 **Backend: Python**
+
 **Framework: Flask**
+
 **Database: MySQL**
+
 **Database Connector: MySQL Connector/Python**
 
 
