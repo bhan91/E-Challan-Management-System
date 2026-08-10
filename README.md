@@ -96,6 +96,35 @@ Access flow:
      Vehicle Mgmt     Cash Payment    UPI/Card Payment
      Reports          Records         Payment Status
 
+```
+e_challan/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+│
+├── database/
+│   └── echallan.sql
+│
+├── templates/
+│   ├── index.html
+│   ├── police_login.html
+│   ├── police_dashboard.html
+│   ├── result.html
+│   ├── payment.html
+│   └── payment_success.html
+│
+└── static/
+    ├── images/
+    │   └── karnataka_logo.png
+    │
+    ├── css/
+    │   └── style.css
+    │
+    └── js/
+        └── script.js
+```
 
 **Database Tables – E-Challan Management System**
 1. RegisteredVehicle
