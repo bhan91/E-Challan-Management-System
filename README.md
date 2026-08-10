@@ -186,25 +186,19 @@ Create a Database
 
 **1. RegisteredVehicle**
 
-`CREATE TABLE RegisteredVehicle (`
-   
+```sql
+CREATE TABLE RegisteredVehicle (
     reg_no VARCHAR(20) PRIMARY KEY,
-    
     owner_name VARCHAR(100),
-    
     vehicle_type VARCHAR(50),
-    
     model VARCHAR(50),
-    
     color VARCHAR(30),
-    
     mobile_no VARCHAR(15),
-    
     address VARCHAR(200)
-
 );
+```
 
-
+```sql
 CREATE TABLE Police_Details (
     
     police_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -219,7 +213,7 @@ CREATE TABLE Police_Details (
     
     address VARCHAR(200)
 );
-
+```
 
 CREATE TABLE Challan (
     
