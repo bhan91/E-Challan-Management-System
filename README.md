@@ -151,6 +151,7 @@ Foreign Key: police_id → Police_Details(police_id)
 | `fine`           | Fine amount                       |
 | `status`         | Paid / Unpaid                     |
 | `payment_mode`   | UPI / Card / Cash                 |
+
 Primary Key: id
 Foreign Key: reg_no → RegisteredVehicle(reg_no)
 id       : 202605
@@ -174,8 +175,7 @@ status   : Unpaid
 | `payment_status`    | Payment status               |
 
 Primary Key: payment_id
-Foreign Keys:
-challan_id → Challan(id)
+Foreign Keys: challan_id → Challan(id)
 reg_no → RegisteredVehicle(reg_no)
 
 
