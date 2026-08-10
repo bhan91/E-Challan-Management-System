@@ -196,6 +196,74 @@ Create a Database
    ``` address VARCHAR(200)```
 ```);```
 
+CREATE TABLE RegisteredVehicle (
+    reg_no VARCHAR(20) PRIMARY KEY,
+    owner_name VARCHAR(100),
+    vehicle_type VARCHAR(50),
+    model VARCHAR(50),
+    color VARCHAR(30),
+    mobile_no VARCHAR(15),
+    address VARCHAR(200)
+);
+
+CREATE TABLE Police_Details (
+    police_id INT PRIMARY KEY AUTO_INCREMENT,
+    officer_name VARCHAR(100),
+    badge_number VARCHAR(50),
+    rank_name VARCHAR(50),
+    mobile_no VARCHAR(15),
+    address VARCHAR(200)
+);
+
+CREATE TABLE Challan (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    reg_no VARCHAR(20),
+    violation VARCHAR(100),
+    location VARCHAR(100),
+    violation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fine INT,
+    status VARCHAR(20) DEFAULT 'Unpaid',
+    payment_mode VARCHAR(20),
+
+    CONSTRAINT fk_challan_vehicle
+    FOREIGN KEY (reg_no)
+    REFERENCES RegisteredVehicle(reg_no)
+);
+
+SHOW TABLES;
+
+**Check table structures**
+DESC RegisteredVehicle;
+DESC Police_Details;
+DESC Police;
+DESC Challan;
+DESC Payment;
+
+
+**Then run your Flask project**
+
+Open Command Prompt / VS Code Terminal in your project folder:
+
+``cd C:\Users\bhanu\OneDrive\Desktop\e_challan``
+
+Install dependencies if needed:
+
+``pip install flask mysql-connector-python``
+
+Then run:
+
+``python app.py``
+
+You should see something similar to:
+
+``* Running on http://127.0.0.1:5000``
+
+Open your browser and go to:
+
+``http://127.0.0.1:5000``
+
+Your E-Challan Management System should now open.
+
 **🎯 Project Objective**
 
 The main objective is to reduce manual paperwork and provide an efficient, centralized system for managing traffic violations, challans, registered vehicles, and payments while demonstrating practical DBMS concepts such as normalization, primary keys, foreign keys, triggers, views, and relational database design.
