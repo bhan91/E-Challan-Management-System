@@ -196,48 +196,81 @@ Create a Database
    ``` address VARCHAR(200)```
 ```);```
 
+
 CREATE TABLE RegisteredVehicle (
+   
     reg_no VARCHAR(20) PRIMARY KEY,
+    
     owner_name VARCHAR(100),
+    
     vehicle_type VARCHAR(50),
+    
     model VARCHAR(50),
+    
     color VARCHAR(30),
+    
     mobile_no VARCHAR(15),
+    
     address VARCHAR(200)
+
 );
+
 
 CREATE TABLE Police_Details (
+    
     police_id INT PRIMARY KEY AUTO_INCREMENT,
+    
     officer_name VARCHAR(100),
+    
     badge_number VARCHAR(50),
+    
     rank_name VARCHAR(50),
+    
     mobile_no VARCHAR(15),
+    
     address VARCHAR(200)
 );
 
+
 CREATE TABLE Challan (
+    
     id INT PRIMARY KEY AUTO_INCREMENT,
+    
     reg_no VARCHAR(20),
+    
     violation VARCHAR(100),
+    
     location VARCHAR(100),
+    
     violation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
     fine INT,
+    
     status VARCHAR(20) DEFAULT 'Unpaid',
+    
     payment_mode VARCHAR(20),
 
     CONSTRAINT fk_challan_vehicle
+    
     FOREIGN KEY (reg_no)
+    
     REFERENCES RegisteredVehicle(reg_no)
 );
 
 SHOW TABLES;
 
 **Check table structures**
+
 DESC RegisteredVehicle;
+
 DESC Police_Details;
+
 DESC Police;
+
 DESC Challan;
+
 DESC Payment;
+
 
 
 ***Then run your Flask project***
