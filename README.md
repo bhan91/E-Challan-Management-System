@@ -1,6 +1,8 @@
 # E-Challan-Management-System
 🚦 E-Challan Management System — A web-based DBMS project for managing traffic violations, registered vehicles, challans, police records, and payments using Python Flask and MySQL.
 
+****
+****
 **🚦 E-Challan Management System**
 
 #The E-Challan Management System is a web-based application developed as a DBMS mini project to digitally manage traffic violations and challan payments.
@@ -340,5 +342,3 @@ The main objective is to reduce manual paperwork and provide an efficient, centr
 
 ****
 
-Suggested GitHub topics:
-python flask mysql dbms e-challan traffic-management html css database-project crud
