@@ -2,7 +2,6 @@
 🚦 E-Challan Management System — A web-based DBMS project for managing traffic violations, registered vehicles, challans, police records, and payments using Python Flask and MySQL.
 
 ****
-****
 **🚦 E-Challan Management System**
 
 #The E-Challan Management System is a web-based application developed as a DBMS mini project to digitally manage traffic violations and challan payments.
@@ -20,7 +19,7 @@ The system allows vehicle owners to search their challan details using their veh
 **Database: MySQL**
 
 **Database Connector: MySQL Connector/Python**
-
+****
 
 *For your E-Challan Management System, you can define three main roles:*
 
@@ -77,7 +76,7 @@ The system allows vehicle owners to search their challan details using their veh
 11. View payment confirmation
 12. Role Summary
 
-
+****
 *Role	Main Responsibilities*
 | Role           | Main Responsibilities                                         |
 | -------------  | ------------------------------------------------------------- |
@@ -85,7 +84,7 @@ The system allows vehicle owners to search their challan details using their veh
 | 🛡️ **Admin**  | Manage users, police, vehicles, challans, payments and system  |
 | 👤 **Public** | Search challans and make online payments                       |
 
-
+****
 Access flow:
 
                     E-CHALLAN SYSTEM
@@ -98,7 +97,7 @@ Access flow:
      Police Mgmt      Vehicle Check   View Fine
      Vehicle Mgmt     Cash Payment    UPI/Card Payment
      Reports          Records         Payment Status
-
+****
 **File Structure**
 ```bash
 e_challan/
@@ -129,7 +128,7 @@ e_challan/
     └── js/
         └── script.js
 ```
-
+****
 **Database Tables – E-Challan Management System**
 1. RegisteredVehicle
 2. Challan
@@ -137,7 +136,7 @@ e_challan/
 4. Police_Details
 5. Police
 
-
+****
 **1. RegisteredVehicle**
 *The RegisteredVehicle table stores information about vehicles that are officially registered in the system. A challan can be issued only for a registered vehicle.*
 | Column          | Description                 |
@@ -207,7 +206,7 @@ Primary Key: payment_id
 Foreign Keys: challan_id → Challan(id)
 reg_no → RegisteredVehicle(reg_no)
 
-
+****
 
 **Command to create a DataBase**
 Create a Database
@@ -335,7 +334,7 @@ Open your browser and go to:
 
 Your E-Challan Management System should now open.
 
-
+****
 **🎯 Project Objective**
 
 The main objective is to reduce manual paperwork and provide an efficient, centralized system for managing traffic violations, challans, registered vehicles, and payments while demonstrating practical DBMS concepts such as normalization, primary keys, foreign keys, triggers, views, and relational database design.
